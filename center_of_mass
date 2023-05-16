@@ -1,0 +1,35 @@
+import bpy
+
+
+class Center_of_MassUI(bpy.types.Panel):
+    bl_label = "Center of Mass"
+    bl_idname = "SCENE_PT_layout"
+    bl_space_type = "PROPERTIES"
+    bl_region_type = "WINDOW"
+    bl_context = "object"
+    
+    def draw(self, context):
+        object = context.object
+        layout = self.layout
+        scene =  context.scene
+        layout.label(text = "Select Meshes")
+        
+        row = layout.row(align = True)
+        row.prop(object, "location")
+        #row.label(text="row 1")
+        split = layout.split()
+        
+        col1 = split.column()
+        col1.label(text = "Selected Object")
+        col2 = split.column()
+        col2.label(text = "")
+        
+def register():
+    bpy.utils.register_class(Center_of_MassUI)
+
+def unregister():
+    bpy.utils.unregister_class(Center_of_MassUI)
+
+
+if __name__ == "__main__":
+    register()
